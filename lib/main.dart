@@ -13,8 +13,8 @@ class MeuAplicativo extends StatelessWidget {
     return MaterialApp(
       title: 'project ANA',
       theme: ThemeData(
-        primarySwatch: AnaColors.caribbean,
-        scaffoldBackgroundColor: AnaColors.darkCyan,
+        primarySwatch: AnaColors.back,
+        scaffoldBackgroundColor: AnaColors.back,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: TelaLogin(),

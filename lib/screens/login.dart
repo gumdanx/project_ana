@@ -7,7 +7,7 @@ class TelaLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AnaColors.champagne,
+      backgroundColor: AnaColors.back,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,41 +16,55 @@ class TelaLogin extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: AnaColors.darkCyan,
+                    color: AnaColors.front,
                 )),
             SizedBox(height: 20),
-            TextField(
-              style: TextStyle(color: AnaColors.darkBlue),
-              decoration: InputDecoration(
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 300), // Define a largura máxima
+              child: TextField(
+                style: TextStyle(color: AnaColors.front),
+                decoration: InputDecoration(
                   labelText: 'Nome de usuário',
-                  labelStyle: TextStyle(color: AnaColors.darkBlue),
+                  labelStyle: TextStyle(color: AnaColors.front),
+                  hintText: 'ex.: richard@lacos21.com',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                ),
               ),
             ),
             SizedBox(height: 10),
-            TextField(
-              style: TextStyle(color: AnaColors.darkBlue),
-              decoration: InputDecoration(
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 300), // Define a largura máxima
+              child: TextField(
+                style: TextStyle(color: AnaColors.front),
+                decoration: InputDecoration(
                   labelText: 'Senha',
-                  labelStyle: TextStyle(color: AnaColors.darkBlue),
+                  labelStyle: TextStyle(color: AnaColors.front),
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              child: Text('Entrar'),
-              style: ElevatedButton.styleFrom(
-                primary: AnaColors.darkBlue, // Define a cor de fundo do botão.
-                onPrimary: AnaColors.champagne, // Define a cor do texto do botão.
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20), // 20dp corner radius
+            Container(
+              width: 120, // Ajuste a largura conforme necessário
+              height: 50,
+              child: ElevatedButton(
+                child: Text('Entrar',
+                  style: TextStyle(fontSize: 18),
                 ),
+                style: ElevatedButton.styleFrom(
+                  primary: AnaColors.front, // Define a cor de fundo do botão.
+                  onPrimary: Colors.white, // Define a cor do texto do botão.
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25), // 20dp corner radius
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => TelaPrincipal()),
+                  );
+                },
               ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaPrincipal()),
-                );
-              },
             ),
           ],
         ),
