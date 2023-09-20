@@ -1,5 +1,4 @@
-// arquivo tela_ver_levantamentos.dart
-
+import 'package:project_ana/globals.dart';
 import 'package:flutter/material.dart';
 
 class TelaVerLevantamentos extends StatefulWidget {
@@ -19,26 +18,29 @@ class _TelaVerLevantamentosState extends State<TelaVerLevantamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Levantamentos Feitos'),
+        title: Text('Levantamentos Feitos',
+          style: TextStyle(color: AnaColors.desertSand),),
       ),
       body: ListView.builder(
         itemCount: levantamentos.length,
         itemBuilder: (context, index) {
           return Card(
+            color: AnaColors.front, // Define a cor do card aqui
             child: ListTile(
-              title: Text(levantamentos[index]),
+              title: Text(levantamentos[index],
+                style: TextStyle(color: AnaColors.champagne),),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.share),
+                    icon: Icon(Icons.share, color: AnaColors.champagne,), // Define a cor do ícone aqui
                     onPressed: () {
                       // Aqui, você pode adicionar a funcionalidade de compartilhar o levantamento
                       // Pode ser por meio de um email, WhatsApp ou qualquer outra plataforma que desejar.
                     },
                   ),
                   IconButton(
-                    icon: Icon(Icons.edit),
+                    icon: Icon(Icons.edit, color: AnaColors.champagne,), // Define a cor do ícone aqui
                     onPressed: () {
                       // Aqui, você pode direcionar o usuário para a tela de edição do levantamento selecionado.
                     },

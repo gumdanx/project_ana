@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_ana/globals.dart';
 
 class TelaEditarAsset extends StatefulWidget {
   final String?
@@ -27,7 +28,8 @@ class _TelaEditarAssetState extends State<TelaEditarAsset> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.asset == null ? 'Novo Asset' : 'Editar Asset'),
+        title: Text(widget.asset == null ? 'Novo Asset' : 'Editar Asset',
+          style: TextStyle(color: AnaColors.desertSand),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

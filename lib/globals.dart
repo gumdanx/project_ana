@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 
-var standardName = 'Nome da Unidade 📝️';
-var newSurvey = '';
-var hasName = false;
-
-String surveyName(){
-  if(hasName){
-      return newSurvey;
-  }
-  else{
-    return standardName;
-  }
-}
-
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
@@ -77,4 +64,3 @@ class AnaColors {
   static final MaterialColor tigersEye = createMaterialColor(tigersEyeBase);
   static final MaterialColor earthYellow = createMaterialColor(earthYellowBase);
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_ana/globals.dart';
 
 class TelaTipoAsset extends StatefulWidget {
   final String tipo;
@@ -25,7 +26,8 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Detalhes de ${widget.tipo}')),
+      appBar: AppBar(title: Text('Detalhes de ${widget.tipo}',
+        style: TextStyle(color: AnaColors.desertSand),)),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

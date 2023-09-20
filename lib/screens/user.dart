@@ -1,5 +1,5 @@
 // arquivo tela_usuario.dart
-
+import 'package:project_ana/globals.dart';
 import 'package:flutter/material.dart';
 
 class TelaUsuario extends StatefulWidget {
@@ -12,7 +12,8 @@ class _TelaUsuarioState extends State<TelaUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Usuário'),
+        title: Text('Usuário',
+            style: TextStyle(color: AnaColors.desertSand),),
       ),
       body: Center(
         child: Column(
