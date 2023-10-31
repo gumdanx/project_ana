@@ -3,8 +3,6 @@ import 'package:project_ana/globals.dart';
 import 'package:project_ana/screens/new_asset.dart';
 import 'package:project_ana/screens/assets.dart';
 
-
-
 class TelaNovoLevantamento extends StatefulWidget {
   @override
   _TelaNovoLevantamentoState createState() => _TelaNovoLevantamentoState();
@@ -74,10 +72,18 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
                       ),
                     ),
                     onPressed: () {
+                      if (_surveyName == "Nome da Unidade 📝️") {
+                        // Se o nome da unidade não for definido, exiba uma mensagem de erro.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Por favor, defina o nome da unidade antes de adicionar um novo asset!'))
+                        );
+                        return;
+                      }
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TelaNovoAsset()),
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TelaNovoAsset(surveyName: _surveyName,)
+                          ),
                       );
                     },
                   ),
@@ -107,7 +113,8 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TelaVerAssets()),
+                            builder: (context) => TelaVerAssets(surveyName: _surveyName),
+                        )
                       );
                     },
                   ),
@@ -166,11 +173,18 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
             ),
             TextButton(
               onPressed: () {
-                setState(() {
-                  _surveyName = _controller.text.isEmpty ? "Nome da Unidade 📝️" : _controller.text;
-                  taEditado = _surveyName == "Nome da Unidade 📝️" ? AnaColors.champagne : AnaColors.front;
-                });
-                Navigator.of(context).pop();
+                if (_controller.text.isEmpty) {
+                  // Se o campo de texto estiver vazio, exiba uma mensagem de erro.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('O nome da unidade é obrigatório!'))
+                  );
+                } else {
+                  setState(() {
+                    _surveyName = _controller.text;
+                    taEditado = AnaColors.front;
+                  });
+                  Navigator.of(context).pop();
+                }
               },
               child: Text('OK'),
             ),
@@ -179,4 +193,5 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
       },
     );
   }
+
 }

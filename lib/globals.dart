@@ -1,4 +1,72 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+String? loggedInUsername;
+
+Future<String> readJsonFromFile(String surveyName) async {
+  try {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/${surveyName}/survey.json');
+    String jsonData = await file.readAsString();
+    return jsonData;
+  } catch (error) {
+    return '[]';  // Retornar uma lista vazia em caso de erro
+  }
+}
+
+Future<File?> saveImageToExternalStorage(File imageFile) async {
+  if (await _requestStoragePermission()) {
+    final directory = await getExternalStorageDirectory();
+    final newPath = '${directory?.path}/project_ana/images';
+    final newDirectory = Directory(newPath);
+    if (!newDirectory.existsSync()) {
+      newDirectory.createSync(recursive: true);
+    }
+    final newImage = imageFile.copySync('$newPath/${imageFile.uri.pathSegments.last}');
+    return newImage;
+  }
+  return null;
+}
+
+Future<bool> _requestStoragePermission() async {
+  var status = await Permission.storage.status;
+  if (status.isDenied) {
+    // Solicita permissões
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+    ].request();
+    return statuses[Permission.storage]!.isGranted;
+  }
+  return status.isGranted;
+}
+
+Future<void> saveJsonToFile(String jsonData, String surveyName) async {
+  final directory = await getApplicationDocumentsDirectory();
+  final file = File('${directory.path}/${surveyName}/survey.json');
+
+  // Verifique se o arquivo existe
+  if (await file.exists()) {
+    String oldContent = await file.readAsString();
+    List<dynamic> oldData = jsonDecode(oldContent);
+
+    Map<String, dynamic> newData = jsonDecode(jsonData);
+    oldData.add(newData); // Adiciona o novo dado à lista antiga
+
+    await file.writeAsString(jsonEncode(oldData)); // Reescreva o arquivo com os dados atualizados
+  } else {
+    await file.writeAsString(jsonData); // Se o arquivo não existir, apenas escreva o JSON
+  }
+}
+
+
+Future<Map<String, dynamic>> loadCategoriesFromAsset() async {
+  String jsonString = await rootBundle.loadString('assets/assets_list.json');
+  return jsonDecode(jsonString);
+}
 
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];

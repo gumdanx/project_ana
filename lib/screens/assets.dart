@@ -1,17 +1,35 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-// Certifique-se de importar a tela de edição quando você a criar
-// import 'tela_editar_asset.dart';
-import 'package:project_ana/screens/edit_asset.dart';
 import 'package:project_ana/globals.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import 'package:project_ana/screens/asset_data.dart';
 
 class TelaVerAssets extends StatefulWidget {
+  final String surveyName;
+  TelaVerAssets({required this.surveyName});
   @override
   _TelaVerAssetsState createState() => _TelaVerAssetsState();
 }
 
 class _TelaVerAssetsState extends State<TelaVerAssets> {
-  // Lista de exemplo. Em uma aplicação real, esses dados provavelmente viriam de um banco de dados.
-  final List<String> assets = ["Asset 1", "Asset 2", "Asset 3", "Asset 4"];
+  List<Map<String, dynamic>> assets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadAssets();
+  }
+
+  void loadAssets() async {
+    String jsonData = await readJsonFromFile(widget.surveyName);
+    List data = jsonDecode(jsonData);
+    setState(() {
+      assets = data.map((item) => item as Map<String, dynamic>).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +40,16 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
         itemCount: assets.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(assets[index],
+            title: Text(assets[index]['name'],  // Corrigindo aqui
               style: TextStyle(color: AnaColors.front),),
             onTap: () {
-              // Navegue para a tela de edição
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          TelaEditarAsset(nome: assets[index])));
+                          TelaTipoAsset(nome: assets[index]['name'],  // E aqui
+                            categoryId: assets[index]['categoryId'],
+                            surveyName: assets[index]['surveyName'])));
             },
           );
         },
