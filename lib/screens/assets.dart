@@ -47,7 +47,8 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
           title: Text('Ver Assets',
             style: TextStyle(color: AnaColors.desertSand),)),
       body: assets.isEmpty
-          ? Center(child: Text('No assets available'))  // Adicionando uma mensagem se a lista estiver vazia
+          ? Center(child: Text('Sem assets disponíveis',
+              style: TextStyle(color: Colors.white.withOpacity(0.5)),))  // Adicionando uma mensagem se a lista estiver vazia
           : ListView.builder(
         itemCount: assets.length,
         itemBuilder: (context, index) {

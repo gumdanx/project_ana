@@ -148,10 +148,12 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
             ),
             if (widget.imagePath != null)
               Expanded(
-                child: Image.file(
+                child: widget.imagePath != null && File(widget.imagePath!).existsSync()
+                    ? Image.file(
                   File(widget.imagePath!),
                   fit: BoxFit.cover,
-                ),
+                )
+                    : Center(child: Text('Sem foto', style: TextStyle(color: AnaColors.front))),
               ),
           ],
         ),
