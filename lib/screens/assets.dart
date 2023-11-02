@@ -1,11 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:project_ana/globals.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
-import 'package:path_provider/path_provider.dart';
-import 'package:project_ana/screens/asset_data.dart';
+import 'package:project_ana/screens/show_asset.dart';
 
 class TelaVerAssets extends StatefulWidget {
   final String surveyName;
@@ -24,32 +20,62 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
   }
 
   void loadAssets() async {
-    String jsonData = await readJsonFromFile(widget.surveyName);
-    List data = jsonDecode(jsonData);
-    setState(() {
-      assets = data.map((item) => item as Map<String, dynamic>).toList();
-    });
+    try {
+      String jsonData = await readJsonFromFile(widget.surveyName);
+      print('JSON Data: $jsonData');  // Log do conteúdo lido do arquivo
+
+      List data = jsonDecode(jsonData);
+      setState(() {
+        assets = data.map((item) => item as Map<String, dynamic>).toList();
+      });
+
+      print('Assets loaded: ${assets.length}');  // Log da quantidade de assets carregados
+    } catch (error) {
+      print('Erro ao carregar os assets: $error');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Building assets view with ${assets.length} assets');  // Log no método build
+
     return Scaffold(
-      appBar: AppBar(title: Text('Ver Assets',
-        style: TextStyle(color: AnaColors.desertSand),)),
-      body: ListView.builder(
+      appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
+          ),
+          title: Text('Ver Assets',
+            style: TextStyle(color: AnaColors.desertSand),)),
+      body: assets.isEmpty
+          ? Center(child: Text('No assets available'))  // Adicionando uma mensagem se a lista estiver vazia
+          : ListView.builder(
         itemCount: assets.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(assets[index]['name'],  // Corrigindo aqui
+            title: Text(assets[index]['name'] ?? 'Nome não disponível',
               style: TextStyle(color: AnaColors.front),),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          TelaTipoAsset(nome: assets[index]['name'],  // E aqui
-                            categoryId: assets[index]['categoryId'],
-                            surveyName: assets[index]['surveyName'])));
+            onTap: () async {
+              // Espera pelo retorno da tela de visualização do asset
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TelaVisualizarAsset(
+                    id: assets[index]['id'] ?? '',
+                    nome: assets[index]['name'] ?? '',
+                    categoryId: assets[index]['asset_type_number'] ?? '',
+                    altName: assets[index]['alt_name'] ?? '',
+                    description: assets[index]['description'] ?? '',
+                    gps: assets[index]['gps'] ?? '',
+                    imagePath: assets[index]['image'] ?? '',
+                    surveyName: assets[index]['survey_name'] ?? '',
+                    tipo: assets[index]['tipo'] ?? '',
+                  ),
+                ),
+              );
+              // Se algo foi retornado e é um sinal de que os dados mudaram, recarregar os assets
+              if (result == true) {
+                loadAssets();
+              }
             },
           );
         },

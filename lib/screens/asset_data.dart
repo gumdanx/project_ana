@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:project_ana/globals.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
 class TelaTipoAsset extends StatefulWidget {
-  final String? tipo;
-  final String? categoryId;
-  final String? nome;
+  final String tipo;
+  final String categoryId;
   final String surveyName;
 
-  TelaTipoAsset({this.tipo, this.nome, required this.categoryId, required this.surveyName})
-      : assert(tipo != null || nome != null,
-  'Ao menos "tipo" ou "nome" deve ser fornecido.');
+  TelaTipoAsset({
+    required this.tipo,
+    required this.categoryId,
+    required this.surveyName,
+  });
 
   @override
   _TelaTipoAssetState createState() => _TelaTipoAssetState();
@@ -26,6 +28,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   late TextEditingController _nomeAlternativoController;
   late TextEditingController _descricaoController;
   File? _capturedImage; // para armazenar o arquivo da imagem capturada
+  String? _assetId; // Adicionado para armazenar o ID do asset
 
   @override
   void initState() {
@@ -33,6 +36,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
     _nomeController = TextEditingController();
     _nomeAlternativoController = TextEditingController();
     _descricaoController = TextEditingController();
+    _assetId = Uuid().v4(); // Gera um novo ID único para o asset
   }
 
   void _updateGPSLocation() async {
@@ -47,7 +51,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      File? savedImage = await saveImageToExternalStorage(File(pickedFile.path));
+      File? savedImage = await saveImageToExternalStorage(File(pickedFile.path), widget.surveyName);
       setState(() {
         _capturedImage = savedImage ?? File(pickedFile.path);
       });
@@ -58,6 +62,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
 
   String toJSON() {
     Map<String, dynamic> data = {
+      "id": _assetId, // Aqui você adiciona o ID ao JSON
       "asset_type_number": widget.categoryId,
       "asset_type_name": widget.tipo,
       "name": _nomeController.text,
@@ -75,15 +80,17 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Detalhes de ${widget.nome ?? widget.tipo}',
+      appBar: AppBar(title: Text('Detalhes de ${widget.tipo}',
         style: TextStyle(color: AnaColors.desertSand),)),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextField(
               controller: _nomeController,
+              style: TextStyle(color: AnaColors.front),
               decoration: InputDecoration(
                 labelText: 'Nome',
                 labelStyle: TextStyle(color: AnaColors.desertSand),
@@ -93,8 +100,9 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
             ),
             TextField(
               controller: _nomeAlternativoController,
+              style: TextStyle(color: AnaColors.front),
               decoration: InputDecoration(
-                labelText: 'Nome Alternativo (opcional)',
+                labelText: 'Nome Alternativo',
                 labelStyle: TextStyle(color: AnaColors.desertSand),
                 hintText: 'Nome ou identificador secundário',
                 hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
@@ -102,6 +110,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
             ),
             TextField(
               controller: _descricaoController,
+              style: TextStyle(color: AnaColors.front),
               decoration: InputDecoration(
                 labelText: 'Descrição',
                 labelStyle: TextStyle(color: AnaColors.desertSand),
@@ -110,7 +119,10 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
               ),
             ),
             ElevatedButton(
-              child: Text(_gpsData ?? 'Salvar localização GPS',
+              style: ElevatedButton.styleFrom(
+                primary: AnaColors.darkGreen,
+              ),
+              child: Text(_gpsData ?? 'GPS',
                 style: TextStyle(
                   color: _gotGPSData ? AnaColors.front : AnaColors.desertSand,
                 ),
@@ -118,15 +130,22 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
               onPressed: _updateGPSLocation,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: AnaColors.darkGreen,
+              ),
               child: Text('Camera',
                 style: TextStyle(color: AnaColors.desertSand),),
               onPressed: _captureImage,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: AnaColors.front,
+              ),
               child: Text('Salvar',
-                style: TextStyle(color: AnaColors.desertSand),),
+                style: TextStyle(color: Colors.white),),
               onPressed: () async {
                 String jsonData = toJSON();
+                print(jsonData);  // <-- Aqui está a linha que imprime o JSON no console
                 await saveJsonToFile(jsonData, widget.surveyName); // Salve a string JSON em um arquivo
                 // Lógica para salvar os dados
                 // Após salvar, retorne para a tela anterior

@@ -32,7 +32,11 @@ class _TelaNovoAssetState extends State<TelaNovoAsset> {
       return CircularProgressIndicator();
     }
     return Scaffold(
-      appBar: AppBar(title: Text('Novo Asset', style: TextStyle(color: AnaColors.desertSand))),
+      appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
+          ),
+          title: Text('Novo Asset', style: TextStyle(color: AnaColors.desertSand))),
       body: ListView.builder(
         itemCount: categories.length,
         itemBuilder: (context, index) {

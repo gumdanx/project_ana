@@ -1,5 +1,9 @@
-import 'package:project_ana/globals.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:project_ana/globals.dart';
+import 'dart:convert';
+import 'package:share_plus/share_plus.dart';
 
 class TelaVerLevantamentos extends StatefulWidget {
   @override
@@ -7,53 +11,134 @@ class TelaVerLevantamentos extends StatefulWidget {
 }
 
 class _TelaVerLevantamentosState extends State<TelaVerLevantamentos> {
-  List<String> levantamentos = [
-    'Levantamento 1',
-    'Levantamento 2',
-    'Levantamento 3',
-    // ... Adicione mais exemplos ou conecte com seu banco de dados
-  ];
+  List<dynamic> levantamentos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSurveys();
+  }
+
+  Future<void> _loadSurveys() async {
+    final dir = await getExternalStorageDirectory();
+    final surveysPath = '${dir?.path}/project_ana/files/';
+    final directory = Directory(surveysPath);
+    final files = directory.listSync();
+
+    List<dynamic> loadedSurveys = [];
+    for (var file in files) {
+      if (file.path.endsWith('.json')) {
+        final String contents = await File(file.path).readAsString();
+        final dynamic surveyData = jsonDecode(contents);
+        loadedSurveys.add(surveyData);
+      }
+    }
+
+    setState(() {
+      levantamentos = loadedSurveys;
+    });
+  }
+
+  // Função para remover o levantamento
+  Future<void> _removeSurvey(String surveyName, int index) async {
+    final dir = await getExternalStorageDirectory();
+    final surveysPath = '${dir?.path}/project_ana/files/';
+
+    // Remove o arquivo JSON
+    final File jsonFile = File('$surveysPath$surveyName.json');
+    if (await jsonFile.exists()) {
+      await jsonFile.delete();
+    }
+
+    // Remove o arquivo ZIP
+    final File zipFile = File('$surveysPath$surveyName.zip');
+    if (await zipFile.exists()) {
+      await zipFile.delete();
+    }
+
+    // Atualiza a lista de levantamentos na tela
+    setState(() {
+      levantamentos.removeAt(index);
+    });
+  }
+
+// Diálogo de confirmação para remoção
+  void _confirmRemoveSurvey(String surveyName, int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Remover Levantamento'),
+          content: Text('Você tem certeza que deseja apagar esse levantamento?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Remover'),
+              onPressed: () {
+                _removeSurvey(surveyName, index);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
+        ),
         title: Text('Levantamentos Feitos',
           style: TextStyle(color: AnaColors.desertSand),),
       ),
       body: ListView.builder(
         itemCount: levantamentos.length,
         itemBuilder: (context, index) {
+          final survey = levantamentos[index];
           return Card(
-            color: AnaColors.front, // Define a cor do card aqui
+            color: AnaColors.front,
             child: ListTile(
-              title: Text(levantamentos[index],
+              title: Text(survey['name'],
                 style: TextStyle(color: AnaColors.champagne),),
               trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
+                mainAxisSize: MainAxisSize.min, // Adicionado para limitar o espaço da Row
+                children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.share, color: AnaColors.champagne,), // Define a cor do ícone aqui
-                    onPressed: () {
-                      // Aqui, você pode adicionar a funcionalidade de compartilhar o levantamento
-                      // Pode ser por meio de um email, WhatsApp ou qualquer outra plataforma que desejar.
-                    },
+                    icon: Icon(Icons.share, color: AnaColors.champagne,),
+                    onPressed: () => _shareSurvey(survey['zipPath']),
                   ),
                   IconButton(
-                    icon: Icon(Icons.edit, color: AnaColors.champagne,), // Define a cor do ícone aqui
-                    onPressed: () {
-                      // Aqui, você pode direcionar o usuário para a tela de edição do levantamento selecionado.
-                    },
+                    icon: Icon(Icons.delete, color: AnaColors.champagne,),
+                    onPressed: () => _confirmRemoveSurvey(survey['name'], index),
                   ),
                 ],
               ),
-              onTap: () {
-                // Se desejar uma ação ao tocar no levantamento completo (e não apenas no ícone de edição)
-              },
             ),
           );
         },
       ),
     );
+  }
+
+
+  void _shareSurvey(String zipPath) async {
+    final File zipFile = File(zipPath);
+    if (await zipFile.exists()) {
+      Share.shareFiles([zipPath], text: 'Aqui está o levantamento.');
+    } else {
+      // Exiba um alerta ou mensagem indicando que o arquivo não foi encontrado
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Arquivo ZIP não encontrado.')),
+      );
+    }
   }
 }

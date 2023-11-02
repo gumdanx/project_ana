@@ -4,13 +4,63 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:archive/archive.dart';
+import 'package:archive/archive_io.dart';
 
 String? loggedInUsername;
 
+// Função para criar um arquivo ZIP e retornar o caminho do arquivo.
+Future<String> createZip(List<File> files, String surveyName) async {
+  final archive = Archive();
+  for (File file in files) {
+    final fileBytes = file.readAsBytesSync();
+    print('Adding file: ${file.path}'); // Confirma que o arquivo foi lido
+    archive.addFile(ArchiveFile(file.path.split("/").last, fileBytes.length, fileBytes));
+  }
+
+  final zipFileBytes = ZipEncoder().encode(archive);
+  if (zipFileBytes == null) {
+    throw Exception('Falha ao criar o arquivo ZIP.');
+  }
+
+  final dir = await getExternalStorageDirectory();
+  final zipFile = File('${dir?.path}/project_ana/files/${surveyName}_${DateTime.now().millisecondsSinceEpoch}.zip');
+
+  await zipFile.writeAsBytes(zipFileBytes);
+  print('ZIP file created at: ${zipFile.path}'); // Confirma que o arquivo ZIP foi criado
+  return zipFile.path; // Retorna o caminho do arquivo ZIP para ser usado depois.
+}
+
+// Função para criar ou atualizar o arquivo JSON com informações do levantamento.
+Future<void> saveSurveyInfo(String surveyName, String zipPath) async {
+  final dir = await getExternalStorageDirectory();
+  final jsonFile = File('${dir?.path}/project_ana/files/survey_${surveyName}_info.json');
+
+  Map<String, dynamic> surveyInfo = {
+    'id': UniqueKey().toString(),
+    'name': surveyName,
+    'zipPath': zipPath,
+  };
+
+  String jsonContent = jsonEncode(surveyInfo);
+  await jsonFile.writeAsString(jsonContent);
+  print('Survey info saved: ${jsonFile.path}'); // Confirma que a informação foi salva
+}
+
+Future<File> _ensureDirectoryExists(String pathToFile) async {
+  final file = File(pathToFile);
+  final directory = file.parent;
+  if (!directory.existsSync()) {
+    directory.createSync(recursive: true);
+    print('Directory created: ${directory.path}'); // Confirma que o diretório foi criado
+  }
+  return file;
+}
+
 Future<String> readJsonFromFile(String surveyName) async {
   try {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/${surveyName}/survey.json');
+    final directory = await getExternalStorageDirectory();
+    final file = await _ensureDirectoryExists('${directory?.path}/project_ana/files/${surveyName}/survey.json');
     String jsonData = await file.readAsString();
     return jsonData;
   } catch (error) {
@@ -18,10 +68,10 @@ Future<String> readJsonFromFile(String surveyName) async {
   }
 }
 
-Future<File?> saveImageToExternalStorage(File imageFile) async {
+Future<File?> saveImageToExternalStorage(File imageFile, String surveyName) async {
   if (await _requestStoragePermission()) {
     final directory = await getExternalStorageDirectory();
-    final newPath = '${directory?.path}/project_ana/images';
+    final newPath = '${directory?.path}/project_ana/files/${surveyName}/images';
     final newDirectory = Directory(newPath);
     if (!newDirectory.existsSync()) {
       newDirectory.createSync(recursive: true);
@@ -45,23 +95,30 @@ Future<bool> _requestStoragePermission() async {
 }
 
 Future<void> saveJsonToFile(String jsonData, String surveyName) async {
-  final directory = await getApplicationDocumentsDirectory();
-  final file = File('${directory.path}/${surveyName}/survey.json');
+  if (await _requestStoragePermission()) {
+    final directory = await getExternalStorageDirectory();
+    final newPath = '${directory?.path}/project_ana/files/${surveyName}';
+    final newDirectory = Directory(newPath);
+    if (!newDirectory.existsSync()) {
+      newDirectory.createSync(recursive: true);
+    }
+    final file = File('$newPath/survey.json');
 
-  // Verifique se o arquivo existe
-  if (await file.exists()) {
-    String oldContent = await file.readAsString();
-    List<dynamic> oldData = jsonDecode(oldContent);
+    List<dynamic> oldData = []; // Vai guardar os dados já existentes
+
+    if (await file.exists()) {
+      // Se o arquivo já existir, leia o conteúdo existente
+      String oldContent = await file.readAsString();
+      oldData = List<dynamic>.from(jsonDecode(oldContent));
+    }
 
     Map<String, dynamic> newData = jsonDecode(jsonData);
     oldData.add(newData); // Adiciona o novo dado à lista antiga
 
     await file.writeAsString(jsonEncode(oldData)); // Reescreva o arquivo com os dados atualizados
-  } else {
-    await file.writeAsString(jsonData); // Se o arquivo não existir, apenas escreva o JSON
+    print("Arquivo JSON salvo em: ${file.path}");  // <-- Imprime o caminho do arquivo no console
   }
 }
-
 
 Future<Map<String, dynamic>> loadCategoriesFromAsset() async {
   String jsonString = await rootBundle.loadString('assets/assets_list.json');

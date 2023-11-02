@@ -1,0 +1,534 @@
+{
+  "1": {
+    "name": "Assets Biofísicos",
+    "description": "São os atributos bióticos e abióticos presentes dentro dos limites da área protegida",
+    "subcategories": {
+      "1.1": {
+        "name": "Beleza Cênica",
+        "subcategories": {
+          "1.1.1": {
+            "name": "Vistas e Panoramas"
+          }
+        }
+      },
+      "1.2": {
+        "name": "Estruturas e Formações Naturais",
+        "subcategories": {
+          "1.2.1": {
+            "name": "Topográfica",
+            "example": "cachoeiras"
+          },
+          "1.2.2": {
+            "name": "Geomórfica",
+            "example": "cavernas, falésias, formações recifais, dunas"
+          }
+        }
+      },
+      "1.3": {
+        "name": "Espetáculos Naturais",
+        "subcategories": {
+          "1.3.1": {
+            "name": "Biótico",
+            "example": "agregações reprodutivas, interações predador-presa"
+          },
+          "1.3.2": {
+            "name": "Abiótico",
+            "example": "gêiser, nascentes"
+          }
+        }
+      },
+      "1.4": {
+        "name": "Recursos Naturais Renováveis",
+        "subcategories": {
+          "1.4.1": {
+            "name": "Biodiversidade/Recursos Genéticos",
+            "example": "diversidade biológica para bioprospecção ou ancestrais de animais de produção ou domésticos"
+          },
+          "1.4.2": {
+            "name": "Produtos não madeireiros",
+            "example": "plantas medicinais, alimentos, resina, frutas, fungos"
+          },
+          "1.4.3": {
+            "name": "Madeira"
+          },
+          "1.4.4": {
+            "name": "Caça e pesca"
+          },
+          "1.4.5": {
+            "name": "Estoques de carbono"
+          },
+          "1.4.6": {
+            "name": "Vento para energia eólica"
+          },
+          "1.4.7": {
+            "name": "Rio com força para geração de energia hidráulica"
+          }
+        }
+      },
+      "1.5": {
+        "name": "Recursos Naturais Não renováveis",
+        "subcategories": {
+          "1.5.1": {
+            "name": "Minerais"
+          },
+          "1.5.2": {
+            "name": "Óleo, Gás, Carvão"
+          },
+          "1.5.3": {
+            "name": "Fósseis"
+          }
+        }
+      },
+      "1.6": {
+        "name": "Espécies",
+        "subcategories": {
+          "1.6.1": {
+            "name": "Espécies ou indivíduos icônicos e emblemáticos",
+            "example": "animais famosos, símbolo do estado"
+          },
+          "1.6.2": {
+            "name": "Espécies importantes para conservação",
+            "example": "espécies-bandeira, raras ou endêmicas"
+          },
+          "1.6.3": {
+            "name": "Espécies importantes para recreação",
+            "example": "pesca recreativa"
+          },
+          "1.6.4": {
+            "name": "Espécies importantes para economia"
+          },
+          "1.6.5": {
+            "name": "Espécies importantes para cultura e/ou religião"
+          }
+        }
+      },
+      "1.7": {
+        "name": "Ecossistemas",
+        "subcategories": {
+          "1.7.1": {
+            "name": "Diversidade de Habitat/Ecossistemas"
+          },
+          "1.7.2": {
+            "name": "Habitat de espécies altamente restritas/ameaçadas"
+          },
+          "1.7.3": {
+            "name": "Funções do ecossistema que criam serviços ecossistêmicos de suporte",
+            "example": "reciclagem de nutrientes, produção primária, formação de solos, polinização"
+          },
+          "1.7.4": {
+            "name": "Funções do ecossistema que criam serviços ecossistêmicos de regulação",
+            "example": "sequestro de carbono, ciclo hidrológico/bacia hidrográfica, decomposição, predação, ciclo populacional"
+          },
+          "1.7.5": {
+            "name": "Corredores ecológicos/Vias verdes"
+          },
+          "1.7.6": {
+            "name": "Serviços de bacias hidrográficas"
+          },
+          "1.7.7": {
+            "name": "Áreas de restauração ecológica",
+            "example": "Recuperação de áreas degradadas"
+          }
+        }
+      },
+      "1.8": {
+        "name": "Recursos para recreação ao ar livre",
+        "example": "águas cristalinas, penhasco para escaladas, rapel"
+      },
+      "1.9": {
+        "name": "Habitats antropogênicos",
+        "subcategories": {
+          "1.9.1": {
+            "name": "Agroflorestas"
+          },
+          "1.9.2": {
+            "name": "Criatório de espécies animais"
+          },
+          "1.9.3": {
+            "name": "Outros"
+          }
+        }
+      }
+    }
+  },
+  "2": {
+    "name": "Assets Humanos",
+    "description": "São os grupos de pessoas associadas com a área protegida que têm um conhecimento e/ou habilidades que proporcionam a conservação dos assets da área protegida e a geração e captura de valor dos assets",
+    "subcategories": {
+      "2.1": {
+        "name": "Técnicos e gestores da área protegida",
+        "subcategories": {
+          "2.1.1": {
+            "name": "Permanente"
+          },
+          "2.1.2": {
+            "name": "Temporário"
+          }
+        }
+      },
+      "2.2": {
+        "name": "Guardas-florestais e brigadistas"
+      },
+      "2.3": {
+        "name": "Guias"
+      },
+      "2.4": {
+        "name": "Voluntários"
+      },
+      "2.5": {
+        "name": "Pesquisadores"
+      },
+      "2.6": {
+        "name": "Comunidades e povos tradicionais com conhecimento ecológico local e de uso de recurso"
+      },
+      "2.7": {
+        "name": "Visitantes regulares e entusiastas de recreação",
+        "example": "observadores de aves, espeleólogos, mergulhadores"
+      }
+    }
+  },
+  "3": {
+    "name": "Assets de Infraestrutura",
+    "description": "São as infraestruturas que têm sido construídas dentro, ao redor ou para a área protegida que viabilizam geração e captação de valor",
+    "subcategories": {
+      "3.1": {
+        "name": "Acesso privado de transporte (para UC)",
+        "subcategories": {
+          "3.1.1": {
+            "name": "Estradas"
+          },
+          "3.1.2": {
+            "name": "Estacionamento ou Marinas"
+          }
+        }
+      },
+      "3.2": {
+        "name": "Acesso público de transporte",
+        "subcategories": {
+          "3.2.1": {
+            "name": "Serviços de ônibus"
+          },
+          "3.2.2": {
+            "name": "Serviços de balsa"
+          },
+          "3.2.3": {
+            "name": "Serviços ferroviários"
+          },
+          "3.2.4": {
+            "name": "Serviços de taxi ou transporte alternativo (vans)"
+          },
+          "3.2.5": {
+            "name": "Pista de Pouso"
+          }
+        }
+      },
+      "3.3": {
+        "name": "Estrutura para os visitantes",
+        "subcategories": {
+          "3.3.1": {
+            "name": "Sistema de Trilhas",
+            "example": "trilhas, mirantes, sinalização"
+          },
+          "3.3.2": {
+            "name": "Pontes e passarelas"
+          },
+          "3.3.3": {
+            "name": "Transporte interno da UC (bondes etc.)"
+          },
+          "3.3.4": {
+            "name": "Acomodação",
+            "example": "hotéis, hostel etc."
+          },
+          "3.3.5": {
+            "name": "Áreas para camping"
+          },
+          "3.3.6": {
+            "name": "Comodidades para visitantes",
+            "example": "centro de informações, cafés, banheiros, lojas, locais para piquenique"
+          },
+          "3.3.7": {
+            "name": "Zoológico, jardim botânico, museus"
+          },
+          "3.3.8": {
+            "name": "Acesso para deficientes"
+          }
+        }
+      },
+      "3.4": {
+        "name": "Assets de gestão da área protegida",
+        "subcategories": {
+          "3.4.1": {
+            "name": "Escritórios e oficinas"
+          },
+          "3.4.2": {
+            "name": "Outras propriedades/edifícios",
+            "example": "acomodação para funcionários, casa abandonada"
+          },
+          "3.4.3": {
+            "name": "Veículos",
+            "example": "carros, barcos etc."
+          },
+          "3.4.4": {
+            "name": "Equipamentos de grande porte",
+            "example": "estação de rádio, torres de incêndio"
+          },
+          "3.4.5": {
+            "name": "Viveiro de plantas e/ou instalações de reprodução em cativeiro"
+          },
+          "3.4.6": {
+            "name": "Ecodutos/túneis (para fauna)"
+          },
+          "3.4.7": {
+            "name": "Aceiros (Corta-fogo), cercas etc."
+          }
+        }
+      },
+      "3.5": {
+        "name": "Utilidades públicas disponíveis na área protegida",
+        "subcategories": {
+          "3.5.1": {
+            "name": "Energia"
+          },
+          "3.5.2": {
+            "name": "Água potável/cisterna/poços"
+          },
+          "3.5.3": {
+            "name": "Rede de saneamento"
+          },
+          "3.5.4": {
+            "name": "Telefone"
+          },
+          "3.5.5": {
+            "name": "Internet"
+          },
+          "3.5.6": {
+            "name": "Outros"
+          }
+        }
+      },
+      "3.6": {
+        "name": "Serviços de emergência acessíveis aos usuários da UC",
+        "subcategories": {
+          "3.6.1": {
+            "name": "Evacuação"
+          },
+          "3.6.2": {
+            "name": "Paramédicos"
+          },
+          "3.6.3": {
+            "name": "Outros"
+          }
+        }
+      },
+      "3.7": {
+        "name": "Infraestrutura de pesquisa",
+        "subcategories": {
+          "3.7.1": {
+            "name": "Transectos permanentes"
+          },
+          "3.7.2": {
+            "name": "Torres de observação"
+          },
+          "3.7.3": {
+            "name": "Alojamento ou bases de apoio para pesquisadores"
+          },
+          "3.7.4": {
+            "name": "Bibliotecas"
+          },
+          "3.7.5": {
+            "name": "Herbário"
+          }
+        }
+      },
+      "3.8": {
+        "name": "Monumento construído e arte pública",
+        "example": "esculturas, santuário religioso"
+      }
+    }
+  },
+  "4": {
+    "name": "Assets Institucionais",
+    "description": "É o quadro legal que constrói uma área protegida e as estruturas e acordos contratuais que conservam assets e viabilizam geração e captação de valor",
+    "subcategories": {
+      "4.1": {
+        "name": "Designações adicionais de conservação",
+        "subcategories": {
+          "4.1.1": {
+            "name": "Designação Nacional",
+            "example": "SNUC, Áreas Prioritárias para Conservação da Natureza"
+          },
+          "4.1.2": {
+            "name": "Designação Internacional",
+            "example": "Ramsar, World heritage, Reserva da Biosfera"
+          },
+          "4.1.3": {
+            "name": "Designação de ONGs",
+            "example": "KBA, IBA, AZA"
+          },
+          "4.1.4": {
+            "name": "Outros"
+          }
+        }
+      },
+      "4.2": {
+        "name": "Estrutura de tomada de decisão",
+        "subcategories": {
+          "4.2.1": {
+            "name": "Planejamento",
+            "example": "plano de manejo"
+          },
+          "4.2.2": {
+            "name": "Conselho gestor"
+          },
+          "4.2.3": {
+            "name": "Planos de Zoneamento",
+            "example": "área de amortecimento"
+          },
+          "4.2.4": {
+            "name": "Entidades de Governança",
+            "example": "Conselhos consultivos, Associações/Colônias de pesca"
+          }
+        }
+      },
+      "4.3": {
+        "name": "Parcerias e acordos comerciais",
+        "subcategories": {
+          "4.3.1": {
+            "name": "Acordos de cogestão",
+            "example": "comunitários etc."
+          },
+          "4.3.2": {
+            "name": "Contratos de Pagamento de Serviços Ecossistêmicos",
+            "example": "REDD"
+          },
+          "4.3.3": {
+            "name": "Acordos de patrocínio comercial"
+          },
+          "4.3.4": {
+            "name": "Acordos de concessão",
+            "example": "companhias de ecoturismo e recreação, provedores de serviços para visitantes"
+          },
+          "4.3.5": {
+            "name": "Acordos de orçamentos adicionais",
+            "example": "acordo de ICMS ecológicos"
+          },
+          "4.3.6": {
+            "name": "Acordos de pesquisa",
+            "example": "parcerias com universidades"
+          },
+          "4.3.7": {
+            "name": "Acordos de compensação",
+            "example": "corporações"
+          },
+          "4.3.8": {
+            "name": "Outros acordos",
+            "example": "governança"
+          }
+        }
+      },
+      "4.4": {
+        "name": "Parcerias e acordos com outras agências governamentais",
+        "subcategories": {
+          "4.4.1": {
+            "name": "Gestão em rede",
+            "example": "Núcleos de Gestão Integrada"
+          },
+          "4.4.2": {
+            "name": "Cooperação com outras agências governamentais"
+          }
+        }
+      }
+    }
+  },
+  "5": {
+    "name": "Assets Culturais",
+    "description": "São as interações entre a área protegida e práticas culturais tradicionais e narrativas que criam uma identidade pública para a área protegida",
+    "subcategories": {
+      "5.1": {
+        "name": "Marca/Emblema baseado em um asset biofísico",
+        "example": "uso da imagem do peixe-boi",
+        "subcategories": {
+          "5.1.1": {
+            "name": "Público",
+            "example": "município"
+          },
+          "5.1.2": {
+            "name": "Comercial"
+          },
+          "5.1.3": {
+            "name": "Sociedade civil",
+            "example": "ONG, clube de futebol"
+          }
+        }
+      },
+      "5.2": {
+        "name": "Interpretações criativas",
+        "subcategories": {
+          "5.2.1": {
+            "name": "Imagem icônica",
+            "example": "foto clássica de uma paisagem"
+          },
+          "5.2.2": {
+            "name": "Outras interpretações artísticas",
+            "example": "pinturas, poesias, músicas, filmes"
+          }
+        }
+      },
+      "5.3": {
+        "name": "Eventos Culturais",
+        "subcategories": {
+          "5.3.1": {
+            "name": "Festas, feiras e festivais típicos"
+          },
+          "5.3.2": {
+            "name": "Exibições",
+            "example": "exposições fotográficas"
+          }
+        }
+      },
+      "5.4": {
+        "name": "Representações de mídia",
+        "subcategories": {
+          "5.4.1": {
+            "name": "Mídia impressa",
+            "example": "guias, livros"
+          },
+          "5.4.2": {
+            "name": "Áudio visual",
+            "example": "documentários"
+          },
+          "5.4.3": {
+            "name": "Mídia digital",
+            "example": "websites, redes sociais"
+          }
+        }
+      },
+      "5.5": {
+        "name": "Mitos e lendas associados à área protegida"
+      },
+      "5.6": {
+        "name": "Associações a celebridades",
+        "example": "pessoas famosas ou populares ligadas à UC"
+      },
+      "5.7": {
+        "name": "Clubes de recreação e associações",
+        "description": "de cunho cultural"
+      },
+      "5.8": {
+        "name": "Monumentos",
+        "example": "esculturas monumentais, pinturas de cavernas, ruínas"
+      },
+      "5.9": {
+        "name": "Construções",
+        "description": "modernas ou históricas"
+      },
+      "5.10": {
+        "name": "Programa educacional",
+        "example": "educação ambiental"
+      },
+      "5.11": {
+        "name": "Local sagrado"
+      }
+    }
+  }
+}

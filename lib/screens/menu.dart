@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:project_ana/globals.dart';
 import 'package:project_ana/screens/new_survey.dart';
 import 'package:project_ana/screens/surveys.dart';
-import 'package:project_ana/screens/user.dart';
 
 class TelaPrincipal extends StatelessWidget {
   @override
@@ -84,33 +83,6 @@ class TelaPrincipal extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30.0),
-          Center(
-            child: Container(
-              width: 280.0, // Define uma largura fixa para o Container
-              height: 60,
-              child: OutlinedButton(
-                child: Text('Usuário',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  primary: AnaColors.champagne,
-                  onSurface: AnaColors.champagne,
-                  side: BorderSide(color: AnaColors.champagne, width: 1.5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaUsuario()),
-                  );
-                },
-              ),
-            ),
-          ),
         ],
       ),
     );
