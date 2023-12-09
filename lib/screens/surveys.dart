@@ -94,6 +94,8 @@ class _TelaVerLevantamentosState extends State<TelaVerLevantamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AnaColors.back,
+        centerTitle: true,
         iconTheme: IconThemeData(
           color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
         ),

@@ -41,6 +41,8 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
 
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: AnaColors.back,
+          centerTitle: true,
           iconTheme: IconThemeData(
             color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
           ),

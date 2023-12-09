@@ -55,11 +55,17 @@ class _TelaLoginState extends State<TelaLogin> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('project ANA',
+            Image.asset(
+              logo,
+              width: 200, // ajuste a largura conforme necessário
+              height: 200, // ajuste a altura conforme necessário
+            ),
+            SizedBox(height: 20), // Espaço entre a imagem e o texto
+            Text('Projeto ANA',
                 style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AnaColors.front,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AnaColors.front,
                 )),
             SizedBox(height: 20),
             ConstrainedBox(

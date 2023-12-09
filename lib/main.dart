@@ -11,7 +11,7 @@ class MeuAplicativo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'project ANA',
+      title: 'Projeto ANA',
       theme: ThemeData(
         primarySwatch: AnaColors.back,
         scaffoldBackgroundColor: AnaColors.back,

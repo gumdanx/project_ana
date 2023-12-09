@@ -137,11 +137,12 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AnaColors.back,
         iconTheme: IconThemeData(
           color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
         ),
         title: Text('Novo Levantamento',
-          style: TextStyle(color: AnaColors.champagne),),
+          style: TextStyle(color: AnaColors.desertSand),),
         centerTitle: true,
       ),
       body: Padding(

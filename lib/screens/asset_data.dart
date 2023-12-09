@@ -40,7 +40,8 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   }
 
   void _updateGPSLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     setState(() {
       _gpsData = 'Lat: ${position.latitude}, Lng: ${position.longitude}';
       _gotGPSData = true;
@@ -48,10 +49,12 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   }
 
   Future<void> _captureImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      File? savedImage = await saveImageToExternalStorage(File(pickedFile.path), widget.surveyName);
+      File? savedImage = await saveImageToExternalStorage(
+          File(pickedFile.path), widget.surveyName);
       setState(() {
         _capturedImage = savedImage ?? File(pickedFile.path);
       });
@@ -80,89 +83,109 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Detalhes de ${widget.tipo}',
-        style: TextStyle(color: AnaColors.desertSand),)),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _nomeController,
-              style: TextStyle(color: AnaColors.front),
-              decoration: InputDecoration(
-                labelText: 'Nome',
-                labelStyle: TextStyle(color: AnaColors.desertSand),
-                hintText: 'Nome ou identificador principal',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-              ),
-            ),
-            TextField(
-              controller: _nomeAlternativoController,
-              style: TextStyle(color: AnaColors.front),
-              decoration: InputDecoration(
-                labelText: 'Nome Alternativo',
-                labelStyle: TextStyle(color: AnaColors.desertSand),
-                hintText: 'Nome ou identificador secundário',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-              ),
-            ),
-            TextField(
-              controller: _descricaoController,
-              style: TextStyle(color: AnaColors.front),
-              decoration: InputDecoration(
-                labelText: 'Descrição',
-                labelStyle: TextStyle(color: AnaColors.desertSand),
-                hintText: 'Informações úteis ou importantes',
-                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AnaColors.darkGreen,
-              ),
-              child: Text(_gpsData ?? 'GPS',
-                style: TextStyle(
-                  color: _gotGPSData ? AnaColors.front : AnaColors.desertSand,
+      appBar: AppBar(
+        backgroundColor: AnaColors.back,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: AnaColors.champagne),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          'Detalhes de ${widget.tipo}',
+          style: TextStyle(color: AnaColors.desertSand),
+        ),
+      ),
+      body: SingleChildScrollView(
+        // Adicione SingleChildScrollView aqui
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _nomeController,
+                style: TextStyle(color: AnaColors.front),
+                decoration: InputDecoration(
+                  labelText: 'Nome',
+                  labelStyle: TextStyle(color: AnaColors.desertSand),
+                  hintText: 'Nome ou identificador principal',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
                 ),
               ),
-              onPressed: _updateGPSLocation,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AnaColors.darkGreen,
-              ),
-              child: Text('Camera',
-                style: TextStyle(color: AnaColors.desertSand),),
-              onPressed: _captureImage,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: AnaColors.front,
-              ),
-              child: Text('Salvar',
-                style: TextStyle(color: Colors.white),),
-              onPressed: () async {
-                String jsonData = toJSON();
-                print(jsonData);  // <-- Aqui está a linha que imprime o JSON no console
-                await saveJsonToFile(jsonData, widget.surveyName); // Salve a string JSON em um arquivo
-                // Lógica para salvar os dados
-                // Após salvar, retorne para a tela anterior
-                Navigator.pop(context);
-              },
-            ),
-            if (_capturedImage != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Image.file(
-                  _capturedImage!,
-                  width: 100, // tamanho da miniatura
-                  height: 100,
-                  fit: BoxFit.cover,
+              TextField(
+                controller: _nomeAlternativoController,
+                style: TextStyle(color: AnaColors.front),
+                decoration: InputDecoration(
+                  labelText: 'Nome Alternativo',
+                  labelStyle: TextStyle(color: AnaColors.desertSand),
+                  hintText: 'Nome ou identificador secundário',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
                 ),
               ),
-          ],
+              TextField(
+                controller: _descricaoController,
+                style: TextStyle(color: AnaColors.front),
+                decoration: InputDecoration(
+                  labelText: 'Descrição',
+                  labelStyle: TextStyle(color: AnaColors.desertSand),
+                  hintText: 'Informações úteis ou importantes',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: AnaColors.darkGreen,
+                ),
+                child: Text(
+                  _gpsData ?? 'GPS',
+                  style: TextStyle(
+                    color: _gotGPSData ? AnaColors.front : AnaColors.desertSand,
+                  ),
+                ),
+                onPressed: _updateGPSLocation,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: AnaColors.darkGreen,
+                ),
+                child: Text(
+                  'Camera',
+                  style: TextStyle(color: AnaColors.desertSand),
+                ),
+                onPressed: _captureImage,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: AnaColors.front,
+                ),
+                child: Text(
+                  'Salvar',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {
+                  String jsonData = toJSON();
+                  print(
+                      jsonData); // <-- Aqui está a linha que imprime o JSON no console
+                  await saveJsonToFile(jsonData,
+                      widget.surveyName); // Salve a string JSON em um arquivo
+                  // Lógica para salvar os dados
+                  // Após salvar, retorne para a tela anterior
+                  Navigator.pop(context);
+                },
+              ),
+              if (_capturedImage != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Image.file(
+                    _capturedImage!,
+                    width: 100, // tamanho da miniatura
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

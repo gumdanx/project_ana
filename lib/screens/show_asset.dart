@@ -52,7 +52,7 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
     var gpsParts = widget.gps!.split(',');
     var lat = gpsParts[0];
     var lng = gpsParts.length > 1 ? gpsParts[1] : '';
-    return _buildField('Localização:', "$lat\n${lng.substring(1)}");
+    return _buildField('Localização:', "$lat\n${lng.length > 1 ? lng.substring(1) : ''}");
   }
 
   Future<void> _deleteAsset() async {
@@ -93,6 +93,8 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AnaColors.back,
+        centerTitle: true,
         iconTheme: IconThemeData(
           color: AnaColors.champagne, // Define a cor do ícone do botão de retornar
         ),

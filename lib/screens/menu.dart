@@ -8,15 +8,16 @@ class TelaPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AnaColors.back, // Define a cor de fundo do Scaffold
+       backgroundColor: AnaColors.back, // Define a cor de fundo do Scaffold
       appBar: AppBar(
+        backgroundColor: AnaColors.back,
         centerTitle: true,
         title: Text(
-          'project ANA',
+          'Projeto ANA',
           style: TextStyle(color: AnaColors.desertSand),
         ),
       ),
-      body: ListView(
+      body: Column( children: <Widget>[ Expanded ( child: ListView(
         padding: const EdgeInsets.all(
             16.0), // Add padding around the list view for better spacing
         children: <Widget>[
@@ -85,6 +86,17 @@ class TelaPrincipal extends StatelessWidget {
           SizedBox(height: 30.0),
         ],
       ),
+      ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20.0), // Espaçamento inferior
+          child: Image.asset(
+            biglogo,
+            width: 500, // Ajuste conforme necessário
+            height: 500, // Ajuste conforme necessário
+          ),
+        ),
+    ],
+    ),
     );
   }
 }

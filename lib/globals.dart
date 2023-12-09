@@ -8,6 +8,8 @@ import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
 
 String? loggedInUsername;
+String logo = 'assets/images/logo.png';
+String biglogo = 'assets/images/fulllogo.png';
 
 // Função para criar um arquivo ZIP e retornar o caminho do arquivo.
 Future<String> createZip(List<File> files, String surveyName) async {
