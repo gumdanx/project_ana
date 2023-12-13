@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:project_ana/globals.dart';
+import 'package:projeto_ana/globals.dart';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 
@@ -92,6 +92,7 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
         backgroundColor: AnaColors.back,
         centerTitle: true,

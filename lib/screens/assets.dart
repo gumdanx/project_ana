@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_ana/globals.dart';
+import 'package:projeto_ana/globals.dart';
 import 'dart:convert';
-import 'package:project_ana/screens/show_asset.dart';
+import 'package:projeto_ana/screens/show_asset.dart';
 
 class TelaVerAssets extends StatefulWidget {
   final String surveyName;
@@ -40,6 +40,7 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
     print('Building assets view with ${assets.length} assets');  // Log no método build
 
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
           backgroundColor: AnaColors.back,
           centerTitle: true,

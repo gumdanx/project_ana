@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_ana/globals.dart';
-import 'package:project_ana/screens/new_asset.dart';
-import 'package:project_ana/screens/assets.dart';
+import 'package:projeto_ana/globals.dart';
+import 'package:projeto_ana/screens/new_asset.dart';
+import 'package:projeto_ana/screens/assets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
@@ -136,6 +136,7 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
         backgroundColor: AnaColors.back,
         iconTheme: IconThemeData(
@@ -342,7 +343,7 @@ class _TelaNovoLevantamentoState extends State<TelaNovoLevantamento> {
                                   controller: _controller,
                                   decoration: InputDecoration(
                                       hintText: "Novo? Insira o nome aqui",
-                                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                                      hintStyle: TextStyle(color: AnaColors.desertSand),
                                   ),
                                   style: TextStyle(color: AnaColors.front),
                                 ),

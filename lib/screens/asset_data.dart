@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:project_ana/globals.dart';
+import 'package:projeto_ana/globals.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -83,6 +83,7 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
         backgroundColor: AnaColors.back,
         centerTitle: true,

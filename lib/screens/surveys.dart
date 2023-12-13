@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:project_ana/globals.dart';
+import 'package:projeto_ana/globals.dart';
 import 'dart:convert';
 import 'package:share_plus/share_plus.dart';
 
@@ -93,6 +93,7 @@ class _TelaVerLevantamentosState extends State<TelaVerLevantamentos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
         backgroundColor: AnaColors.back,
         centerTitle: true,
@@ -110,16 +111,16 @@ class _TelaVerLevantamentosState extends State<TelaVerLevantamentos> {
             color: AnaColors.front,
             child: ListTile(
               title: Text(survey['name'],
-                style: TextStyle(color: AnaColors.champagne),),
+                style: TextStyle(color: AnaColors.isDarkMode ? AnaColors.champagne : AnaColors.darkGreen),),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min, // Adicionado para limitar o espaço da Row
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.share, color: AnaColors.champagne,),
+                    icon: Icon(Icons.share, color: AnaColors.isDarkMode ? AnaColors.champagne : AnaColors.darkGreen,),
                     onPressed: () => _shareSurvey(survey['zipPath']),
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete, color: AnaColors.champagne,),
+                    icon: Icon(Icons.delete, color: AnaColors.isDarkMode ? AnaColors.champagne : AnaColors.darkGreen,),
                     onPressed: () => _confirmRemoveSurvey(survey['name'], index),
                   ),
                 ],

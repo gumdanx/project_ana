@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_ana/screens/asset_data.dart';
-import 'package:project_ana/globals.dart';
+import 'package:projeto_ana/screens/asset_data.dart';
+import 'package:projeto_ana/globals.dart';
 
 class TelaNovoAsset extends StatefulWidget {
   final String surveyName;
@@ -32,6 +32,7 @@ class _TelaNovoAssetState extends State<TelaNovoAsset> {
       return CircularProgressIndicator();
     }
     return Scaffold(
+      backgroundColor: AnaColors.back,
       appBar: AppBar(
           backgroundColor: AnaColors.back,
           centerTitle: true,

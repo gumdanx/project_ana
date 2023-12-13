@@ -127,6 +127,37 @@ Future<Map<String, dynamic>> loadCategoriesFromAsset() async {
   return jsonDecode(jsonString);
 }
 
+class AnaColors {
+  static bool isDarkMode = true; // Controla o tema
+
+  static MaterialColor get back => isDarkMode ? createMaterialColor(Dark.back) : createMaterialColor(Light.back);
+  static MaterialColor get front => isDarkMode ? createMaterialColor(Dark.front) : createMaterialColor(Light.front);
+  static MaterialColor get champagne => isDarkMode ? createMaterialColor(Dark.champagne) : createMaterialColor(Light.champagne);
+  static MaterialColor get desertSand => isDarkMode ? createMaterialColor(Dark.desertSand) : createMaterialColor(Light.desertSand);
+  static MaterialColor get darkGreen => isDarkMode ? createMaterialColor(Dark.darkGreen) : createMaterialColor(Light.darkGreen);
+
+  static final _AnaColorsDark Dark = _AnaColorsDark();
+  static final _AnaColorsLight Light = _AnaColorsLight();
+}
+
+class _AnaColorsDark {
+  final Color back = Color(0xFF1E1E1E);
+  final Color front = Color(0xFF259544);
+  final Color champagne = Color(0xFFF3DFC1);
+  final Color desertSand = Color(0xFFDDBEA8);
+  final Color darkGreen = Color(0xFF1E352F);
+// Adicione outras cores do tema escuro aqui
+}
+
+class _AnaColorsLight {
+  final Color back = Color(0xFFF5F5F5);
+  final Color front = Color(0xFF1E1E1E);
+  final Color champagne = Color(0xAA1E1E1E); // Mantenha a mesma se adequada para ambos os temas
+  final Color desertSand = Color(0x771E1E1E);
+  final Color darkGreen = Color(0xFF81C784);
+// Adicione outras cores do tema claro aqui
+}
+
 MaterialColor createMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
@@ -145,49 +176,4 @@ MaterialColor createMaterialColor(Color color) {
     );
   });
   return MaterialColor(color.value, swatch);
-}
-
-class AnaColors {
-  AnaColors._();
-
-  static const Color darkBlueBase = Color(0xFF160F29);
-  static const Color caribbeanBase = Color(0xFF246A73);
-  static const Color darkCyanBase = Color(0xFF368F8B);
-  static const Color champagneBase = Color(0xFFF3DFC1);
-  static const Color desertSandBase = Color(0xFFDDBEA8);
-
-  static const Color vanDykeBase = Color(0xFF4B3B40);
-  static const Color coyoteBase = Color(0xFF82735C);
-  static const Color olivineBase = Color(0xFF9DB17C);
-  static const Color celadonBase = Color(0xFF9CDE9F);
-  static const Color teaGreenBase = Color(0xFFD1F5BE);
-
-  static const Color richBlackBase = Color(0xFF001011);
-  static const Color darkGreenBase = Color(0xFF1E352F);
-  static const Color brunswickGreenBase = Color(0xFF335145);
-  static const Color tigersEyeBase = Color(0xFFBC6C25);
-  static const Color earthYellowBase = Color(0xFFDDA14E);
-
-  static const Color backBase = Color(0xFF1E1E1E);
-  static final MaterialColor back = createMaterialColor(backBase);
-  static const Color frontBase = Color(0xFF259544);
-  static final MaterialColor front = createMaterialColor(frontBase);
-
-  static final MaterialColor darkBlue = createMaterialColor(darkBlueBase);
-  static final MaterialColor caribbean = createMaterialColor(caribbeanBase);
-  static final MaterialColor darkCyan = createMaterialColor(darkCyanBase);
-  static final MaterialColor champagne = createMaterialColor(champagneBase);
-  static final MaterialColor desertSand = createMaterialColor(desertSandBase);
-
-  static final MaterialColor vanDyke = createMaterialColor(vanDykeBase);
-  static final MaterialColor coyote = createMaterialColor(coyoteBase);
-  static final MaterialColor olivine = createMaterialColor(olivineBase);
-  static final MaterialColor celadon = createMaterialColor(celadonBase);
-  static final MaterialColor teaGreen = createMaterialColor(teaGreenBase);
-
-  static final MaterialColor richBlack = createMaterialColor(richBlackBase);
-  static final MaterialColor darkGreen = createMaterialColor(darkGreenBase);
-  static final MaterialColor brunswickGreen = createMaterialColor(brunswickGreenBase);
-  static final MaterialColor tigersEye = createMaterialColor(tigersEyeBase);
-  static final MaterialColor earthYellow = createMaterialColor(earthYellowBase);
 }
