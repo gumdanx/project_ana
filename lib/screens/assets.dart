@@ -72,7 +72,7 @@ class _TelaVerAssetsState extends State<TelaVerAssets> {
                     gps: assets[index]['gps'] ?? '',
                     imagePath: assets[index]['image'] ?? '',
                     surveyName: assets[index]['survey_name'] ?? '',
-                    tipo: assets[index]['tipo'] ?? '',
+                    tipo: assets[index]['asset_type_name'] ?? '',
                   ),
                 ),
               );

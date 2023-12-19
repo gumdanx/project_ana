@@ -35,6 +35,7 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
   late TextEditingController _nomeController;
   late TextEditingController _altNameController;
   late TextEditingController _descriptionController;
+  late TextEditingController _typeController;
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
     _nomeController = TextEditingController(text: widget.nome);
     _altNameController = TextEditingController(text: widget.altName);
     _descriptionController = TextEditingController(text: widget.description);
+    _typeController = TextEditingController(text: widget.categoryId! + ' ' + widget.tipo!);
   }
 
   Widget? _buildGPSField() {
@@ -146,6 +148,7 @@ class _TelaVisualizarAssetState extends State<TelaVisualizarAsset> {
                 _buildField('Nome:', _nomeController.text),
                 _buildField('Nome Alternativo:', _altNameController.text),
                 _buildField('Descrição:', _descriptionController.text),
+                _buildField('Tipo Asset:', _typeController.text),
                 if (widget.gps != null) _buildGPSField()!,
               ],
             ),

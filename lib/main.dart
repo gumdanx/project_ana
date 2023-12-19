@@ -1,11 +1,19 @@
 // main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projeto_ana/screens/login.dart'; // ATENCAO A ESSE IMPORT
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:projeto_ana/globals.dart';
 
-void main() => runApp(MeuAplicativo());
+void main() {
+  // Configura as orientações suportadas do aplicativo
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((_) {
+    runApp(MeuAplicativo());
+  });
+}
 
 class MeuAplicativo extends StatefulWidget {
   @override

@@ -165,13 +165,30 @@ class _TelaTipoAssetState extends State<TelaTipoAsset> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
+                  // Verifica se o campo 'Nome' está preenchido
+                  if (_nomeController.text.isEmpty) {
+                    // Mostra um alerta ou uma mensagem de erro
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Erro'),
+                        content: Text('Por favor, preencha o campo Nome.'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text('OK'),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ],
+                      ),
+                    );
+                    return; // Não prossegue se o campo 'Nome' estiver vazio
+                  }
+
+                  // Se o campo 'Nome' estiver preenchido, prossegue com o salvamento
                   String jsonData = toJSON();
-                  print(
-                      jsonData); // <-- Aqui está a linha que imprime o JSON no console
-                  await saveJsonToFile(jsonData,
-                      widget.surveyName); // Salve a string JSON em um arquivo
-                  // Lógica para salvar os dados
-                  // Após salvar, retorne para a tela anterior
+                  print(jsonData); // Imprime o JSON no console
+                  await saveJsonToFile(jsonData, widget.surveyName); // Salva a string JSON em um arquivo
+                  // Retorna para a tela anterior após salvar
                   Navigator.pop(context);
                 },
               ),
